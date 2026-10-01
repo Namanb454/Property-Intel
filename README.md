@@ -74,7 +74,7 @@ Typography: **Newsreader** (serif display, optical sizing) and **Geist** (UI/bod
 
 ## Before launch
 
-- Set the Property Intel in `src/config/site.ts` (currently `[Property Intel]`).
+- Set the Property Intel in `src/config/site.ts` (currently `Property Intel`).
 - Replace sample data in `src/data` (projects, scorecard values and price-per-sq-ft figures are placeholders; Q3 2026 sales are ANAROCK figures). Remove `sampleDataNotices` in `site.ts` when real data is connected.
 - Connect the newsletter action in `src/lib/actions/newsletter.ts` to an email provider.
 - Set `NEXT_PUBLIC_SITE_URL` so the sitemap uses absolute production URLs.

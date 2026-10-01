@@ -2,7 +2,7 @@ import type { SocialLink } from "@/types";
 
 export const siteConfig = {
   /** Replace with the final Property Intel — it is used in the masthead, footer and metadata. */
-  name: "[Property Intel]",
+  name: "Property Intel",
   tagline: "Real estate intelligence for India",
   description:
     "Independent research and verified project listings for India's housing market. Information only — not investment advice.",
