@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+/*
+ * Mono + Orange theme
+ * Black-and-white editorial base with one bold orange accent.
+ * Every colour used in the UI is a token here — components never hard-code hex values.
+ */
+@theme {
+  /* Breakpoints (min-width) — mirror the design's 720 / 960 / 1100 px max-width rules */
+  --breakpoint-sm: 45.0625rem; /* 721px */
+  --breakpoint-md: 60.0625rem; /* 961px */
+  --breakpoint-lg: 68.8125rem; /* 1101px */
+
+  /* Typography — font variables are injected by next/font in app/layout.tsx */
+  --font-sans: var(--font-geist), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, serif;
+
+  /* Type scale keeps the browser's natural line height; set leading-* explicitly where copy needs it */
+  --text-xs--line-height: normal;
+  --text-sm--line-height: normal;
+  --text-base--line-height: normal;
+  --text-lg--line-height: normal;
+  --text-xl--line-height: normal;
+  --text-2xl--line-height: normal;
+  --text-3xl--line-height: normal;
+  --text-4xl--line-height: normal;
+  --text-5xl--line-height: normal;
+
+  /* ---- Core palette ---- */
+  --color-page: #fafaf9; /* Page */
+  --color-ink: #111111; /* Ink — headings, primary buttons */
+  --color-surface: #ffffff;
+  --color-band: #111111; /* Dark bands: utility bar, projects, footer */
+
+  /* Accent */
+  --color-accent: #ff5a1f; /* Orange */
+  --color-accent-tint: #fff0e8; /* Orange tint */
+  --color-accent-strong: #c2410c; /* Orange text on light (AA) */
+  --color-accent-deep: #b83a0a; /* Orange text on tint */
+  --color-accent-soft: #ff7a45; /* Orange on dark */
+  --color-accent-pale: #ff9a62;
+  --color-accent-paler: #ffb088;
+  --color-accent-muted: #ff9e7a;
+  --color-accent-night: #2a1c14; /* Orange tint on dark */
+
+  /* Text */
+  --color-text: #4d4d4d; /* Body copy */
+  --color-text-strong: #2a2a2a;
+  --color-text-subtle: #3d3d3b;
+  --color-text-soft: #525252;
+  --color-text-muted: #6b6b6b;
+
+  /* Lines & fills */
+  --color-line: #e7e7e4;
+  --color-line-soft: #efefec;
+  --color-line-card: #eaeae7;
+  --color-line-strong: #d6d6d2;
+  --color-track: #e0e0dc;
+  --color-fill: #f0f0ee;
+  --color-fill-chip: #eeeeeb;
+  --color-fill-tag: #f3f3f1;
+  --color-fill-input: #f7f7f5;
+  --color-fill-segment: #ecece9;
+  --color-placeholder: #e2e2de;
+  --color-rank: #c8c8c3;
+  --color-bar: #3d3d3b;
+
+  /* Status */
+  --color-positive: #15803d;
+  --color-positive-deep: #166534;
+  --color-positive-tint: #e8f5ec;
+  --color-positive-soft: #7bd88f; /* Green on dark */
+  --color-positive-night: #14251b;
+  --color-warning: #9a5b00;
+  --color-gold: #f1d99b;
+
+  /* Dark band surfaces & text */
+  --color-band-raised: #191919;
+  --color-band-sunken: #1c1c1c;
+  --color-band-fill: #232323;
+  --color-band-line: #2e2e2e;
+  --color-band-rule: #2a2a2a;
+  --color-band-border: #3d3d3d;
+  --color-band-chip: #3a3a3a;
+  --color-band-divider: #333333;
+  --color-band-text: #f2f2f2;
+  --color-band-text-soft: #b5b5b5;
+  --color-band-text-muted: #9a9a9a;
+  --color-band-segment: #c4c4c4;
+  --color-band-chip-text: #dedede;
+  --color-band-label: #d6d6d6;
+  --color-chrome: #cfcfcf; /* Utility bar / footer copy */
+  --color-chrome-strong: #e6e6e6;
+  --color-chrome-muted: #a3a3a3;
+  --color-footer-link: #bdbdbd;
+  --color-footer-muted: #ababab;
+
+  /* Radii */
+  --radius-control: 0.75rem;
+  --radius-tile: 0.875rem;
+  --radius-media: 1.125rem;
+  --radius-card: 1.25rem;
+  --radius-panel: 1.375rem;
+  --radius-hero: 1.5rem;
+
+  /* Shadows */
+  --shadow-lift: 0 1.125rem 2.5rem rgba(17, 17, 17, 0.1);
+  --shadow-segment: 0 1px 3px rgba(17, 17, 17, 0.14);
+
+  /* Motion */
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* Horizontal page gutter used by every section container */
+@utility px-gutter {
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+/* Section containers: a fixed content width plus the gutter (content-box, as in the design) */
+@utility container-page {
+  box-sizing: content-box;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+@utility container-narrow {
+  box-sizing: content-box;
+  max-width: 45rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+@layer base {
+  /*
+   * Every size in the UI is in rem, so this one value scales the whole interface.
+   * Phones keep the full 16px base; tablets and desktops render at 87.5% (14px).
+   */
+  html {
+    font-size: 100%;
+    line-height: normal;
+    scroll-behavior: smooth;
+  }
+
+  @media (width >= 45.0625rem) {
+    html {
+      font-size: 87.5%;
+    }
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--color-accent-strong);
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Card lifts on hover */
+  .lift {
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .lift:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* Image zooms gently inside its frame on hover */
+  .zoom img {
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .zoom:hover img {
+    transform: scale(1.045);
+  }
+
+  /* Underlines the `.t` title inside a link on hover */
+  .uline:hover .t {
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
+  }
+
+}
+
+@utility noscroll {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
